@@ -1,4 +1,4 @@
 pr2
 ===
 
-Programming assignments
+Programming assignments.
