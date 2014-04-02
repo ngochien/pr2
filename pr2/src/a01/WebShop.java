@@ -42,9 +42,7 @@ public class WebShop {
 		}
 		
 		for (Customer customer : customerList) {
-			System.out.print(customer.getLastName() + ", "
-					+ customer.getFirstName());
-			System.out.println(" (id: " + customer.getCustomerID() + ")");
+			System.out.println(customer);
 		}
 	}
 }
