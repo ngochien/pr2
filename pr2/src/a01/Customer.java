@@ -47,9 +47,4 @@ public class Customer {
 	public int getCustomerID() {
 		return customerID;
 	}
-	
-	public String toString() {
-		return
-			getLastName() + ", " + getFirstName() + ", ID: " + getCustomerID();
-	}
 }
