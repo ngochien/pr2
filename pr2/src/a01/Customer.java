@@ -21,6 +21,10 @@ public class Customer {
 	 * @param customerID
 	 */
 	public Customer(String firstName, String lastName) {
+//		if (firstName == null || lastName == null) {
+//			throw new NullPointerException("Name ungültig");
+//		}
+		
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.customerID = customerCounter;
