@@ -35,12 +35,12 @@ public class WebShop {
 	}
 	
 	public void printListOfCustomers(SortingCriterion s) {
-		if (s.equals(SortingCriterion.SORT_BY_LASTNAME_FIRSTNAME)) {
-			Collections.sort(customerList, new CustomerComparatorByName());
-		} else {
-			Collections.sort(customerList, new CustomerComparatorByID());
-		}
-		
+//		if (s.equals(SortingCriterion.SORT_BY_LASTNAME_FIRSTNAME)) {
+//			Collections.sort(customerList, new CustomerComparatorByName());
+//		} else {
+//			Collections.sort(customerList, new CustomerComparatorByID());
+//		}
+		Collections.sort(customerList, s.getComparator());
 		for (Customer customer : customerList) {
 			System.out.println(customer);
 		}
