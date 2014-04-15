@@ -5,7 +5,7 @@ package a01;
  */
 
 /**
- * @author DELL
+ * @author DELLHien
  *
  */
 public class Customer {
@@ -22,7 +22,7 @@ public class Customer {
 	 */
 	public Customer(String firstName, String lastName) {
 //		if (firstName == null || lastName == null) {
-//			throw new NullPointerException("Name ungültig");
+//			throw new NullPointerException("Name ungï¿½ltig");
 //		}
 		
 		this.firstName = firstName;
