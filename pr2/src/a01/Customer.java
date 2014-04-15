@@ -1,8 +1,19 @@
+/**
+ * HAW Hamburg - Studiengang Wirtschaftsinformatik
+ * Programmieren II - Wintersemester 2013/2014
+ *
+ * Aufgabenblatt 1
+ * 
+ * ngochien.le@haw-hamburg.de
+ * bichngoc.nguyen@haw-hamburg.de
+ * 
+ */
+
 package a01;
 
 /**
- * @author DELL
- * 
+ * @author Le
+ * @author Nguyen
  */
 public class Customer {
 
@@ -48,6 +59,7 @@ public class Customer {
 		return customerID;
 	}
 
+	@Override
 	public String toString() {
 		return getLastName() + ", " + getFirstName() + ", ID: "
 				+ getCustomerID();
