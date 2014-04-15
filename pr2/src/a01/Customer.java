@@ -1,30 +1,20 @@
 package a01;
 
 /**
+ * @author DELL
  * 
  */
-
-/**
- * @author DELLHien
- *
- */
 public class Customer {
-	
+
 	private static int customerCounter = 0;
 	private String firstName;
 	private String lastName;
 	private int customerID;
-	
+
 	/**
-	 * @param firstName
-	 * @param lastName
-	 * @param customerID
+	 * Constructor
 	 */
 	public Customer(String firstName, String lastName) {
-//		if (firstName == null || lastName == null) {
-//			throw new NullPointerException("Name ung�ltig");
-//		}
-		
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.customerID = customerCounter;
@@ -32,28 +22,34 @@ public class Customer {
 	}
 
 	/**
-	 * @return the firstName
+	 * Getter
+	 * 
+	 * @return firstName
 	 */
 	public String getFirstName() {
 		return firstName;
 	}
 
 	/**
-	 * @return the lastName
+	 * Getter
+	 * 
+	 * @return lastName
 	 */
 	public String getLastName() {
 		return lastName;
 	}
 
 	/**
-	 * @return the customerID
+	 * Getter
+	 * 
+	 * @return customerID
 	 */
 	public int getCustomerID() {
 		return customerID;
 	}
-	
+
 	public String toString() {
-		return
-			getLastName() + ", " + getFirstName() + ", ID: " + getCustomerID();
+		return getLastName() + ", " + getFirstName() + ", ID: "
+				+ getCustomerID();
 	}
 }

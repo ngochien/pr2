@@ -13,18 +13,15 @@ public class WebShopApp {
 	public static void main(String[] args) {
 
 		WebShop webShop = new WebShop();
-		try {
-			webShop.addCustomer("Jogi", "Löw");
-			webShop.addCustomer("Uli", "Hoeneß");
-			webShop.addCustomer("Hansi", "Flick");
-			webShop.addCustomer("Dieter", "Hoeneß");
-			webShop.addCustomer("Hansi", "Flick");
-			webShop.addCustomer("Mehmet", "Scholl");
-			webShop.addCustomer("Marco", "Reus");
-//			webShop.addCustomer("Marco", null);
-		} catch (NullPointerException ie) {
-			ie.printStackTrace();
-		}
+
+		webShop.addCustomer("Jogi", "Lï¿½w");
+		webShop.addCustomer("Uli", "Hoeneï¿½");
+		webShop.addCustomer("Hansi", "Flick");
+		webShop.addCustomer("Dieter", "Hoeneï¿½");
+		webShop.addCustomer("Hansi", "Flick");
+		webShop.addCustomer("Mehmet", "Scholl");
+		webShop.addCustomer("Marco", "Reus");
+
 		webShop.printListOfCustomers(SortingCriterion.SORT_BY_LASTNAME_FIRSTNAME);
 
 		webShop.printListOfCustomers(SortingCriterion.SORT_BY_ID);
