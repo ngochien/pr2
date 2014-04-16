@@ -18,9 +18,21 @@ package a01;
 public class Customer {
 
 	private static int customerCounter = 0;
+	
+	/**
+	 * First name of customer
+	 */
 	private String firstName;
+	
+	/**
+	 * Last name of customer
+	 */
 	private String lastName;
-	private int customerID;
+	
+	/**
+	 * Unique customer ID
+	 */
+	private final int customerID;
 
 	/**
 	 * Constructor

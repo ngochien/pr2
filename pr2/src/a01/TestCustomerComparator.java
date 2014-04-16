@@ -21,10 +21,10 @@ import org.junit.Test;
  */
 public class TestCustomerComparator {
 
+	Customer c0 = new Customer("Hansi", "Flick");
 	Customer c1 = new Customer("Hansi", "Flick");
-	Customer c2 = new Customer("Hansi", "Flick");
+	Customer c2 = new Customer("Uli", "Hoeneß");
 	Customer c3 = new Customer("Dieter", "Hoeneß");
-	Customer c4 = new Customer("Uli", "Hoeneß");
 
 	Comparator<Customer> comparator;
 
@@ -32,26 +32,35 @@ public class TestCustomerComparator {
 	public void testComparatorByName() {
 		comparator = new CustomerComparatorByName();
 
-		// compare last name
-		assertEquals(-1, comparator.compare(c1, c3));
-		assertEquals(1, comparator.compare(c3, c1));
+		// Case 1: Last names are different, so we get result of last name comparison.
+		assertTrue(comparator.compare(c0, c2) < 0);
+		assertTrue(comparator.compare(c2, c0) > 0);
+		
 
-		// last names are the same, compare first name
-		assertEquals(-1, comparator.compare(c3, c4));
-		assertEquals(1, comparator.compare(c4, c3));
+		// Case 2 : Last names are the same, so we get result of first name comparison.
+		assertTrue(comparator.compare(c3, c2) < 0);
+		assertTrue(comparator.compare(c2, c3) > 0);
 
-		// last names and first names are the same, compare ID
-		assertEquals(-1, comparator.compare(c1, c2));
-		assertEquals(1, comparator.compare(c2, c1));
-		assertEquals(0, comparator.compare(c1, c1));
+		// Case 3 : Last names and first names are the same, so we get zero.
+		assertTrue(comparator.compare(c0, c1) == 0);
+		assertTrue(comparator.compare(c1, c0) == 0);
+		
+		/* 
+		 * Whether we should compare ID in case of identical
+		 * last name and first name or not, it depends on project.
+		 * 
+		 * <code>assertEquals(-1, comparator.compare(c0, c1));</code>
+		 * <code>assertEquals(1, comparator.compare(c1, c0));</code>
+		 * <code>assertEquals(0, comparator.compare(c0, c0));</code>
+		 */
 	}
 
 	@Test
 	public void testComparatorByID() {
 		comparator = new CustomerComparatorByID();
 
-		assertEquals(-1, comparator.compare(c1, c2));
-		assertEquals(1, comparator.compare(c2, c1));
-		assertEquals(0, comparator.compare(c1, c1));
+		assertTrue(comparator.compare(c0, c1) < 0);
+		assertTrue(comparator.compare(c2, c1) > 0);
+		assertTrue(comparator.compare(c0, c0) == 0);
 	}
 }
