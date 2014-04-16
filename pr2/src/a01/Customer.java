@@ -12,7 +12,7 @@
 package a01;
 
 /**
- * @author Le
+ * @author  Hien Le
  * @author Nguyen
  */
 public class Customer {
