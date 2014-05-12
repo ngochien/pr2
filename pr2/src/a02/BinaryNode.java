@@ -10,6 +10,8 @@
 package a02;
 
 /**
+ * A generic node in binary tree which contains a key and a value
+ * 
  * @author Le
  * @author Nguyen
  */
@@ -20,6 +22,12 @@ public class BinaryNode<K, V> {
 	private BinaryNode<K, V> left;
 	private BinaryNode<K, V> right;
 
+	/**
+	 * Constructor
+	 * 
+	 * @param key
+	 * @param value
+	 */
 	public BinaryNode(K key, V value) {
 		this.key = key;
 		this.value = value;
@@ -69,13 +77,13 @@ public class BinaryNode<K, V> {
 
 	@Override
 	public String toString() {
-		String rs = key + ": " + value + "\n";
+		String result = key + ": " + value + "\n";
 		if (left != null) {
-			rs += left.toString();
+			result += left.toString();
 		}
 		if (right != null) {
-			rs += right.toString();
+			result += right.toString();
 		}
-		return rs;
+		return result;
 	}
 }

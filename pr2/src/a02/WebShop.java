@@ -35,6 +35,7 @@ public class WebShop {
 	public Customer getCustomer(String firstName, String lastName) {
 		return customers.search(lastName + " " + firstName);
 	}
+	
 	/**
 	 * All customers with firstName and lastName will be removed.
 	 * 

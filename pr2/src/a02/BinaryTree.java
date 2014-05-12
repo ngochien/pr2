@@ -28,6 +28,7 @@ public class BinaryTree<K, V> {
 	public BinaryNode<K, V> getRoot() {
 		return root;
 	}
+	
 	public void insert(BinaryNode<K, V> node) throws DuplicateKeyException {
 		root = insert(root, node);
 	}

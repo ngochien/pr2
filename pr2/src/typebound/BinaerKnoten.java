@@ -15,7 +15,7 @@ package typebound;
  */
 public class BinaerKnoten<T extends Number> {
 
-	 private static Number DEFAULT_VALUE = null; // nicht möglich
+	private static Number DEFAULT_VALUE = null; // nicht möglich
 	private T element;
 	
 	private BinaerKnoten<T> left, right;
