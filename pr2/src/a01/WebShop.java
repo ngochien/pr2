@@ -58,10 +58,17 @@ public class WebShop {
 	 * 
 	 * @param s sorting criterion
 	 */
-	public void printListOfCustomers(SortingCriterion s) {
+	public void printSortedListOfCustomers(SortingCriterion s) {
 		Collections.sort(customers, s.getComparator());
+		System.out.println(this);
+	}
+	
+	@Override
+	public String toString() {
+		String webShop = "";
 		for (Customer customer : customers) {
-			System.out.println(customer);
+			webShop += customer + "\n";
 		}
+		return webShop;
 	}
 }

@@ -21,12 +21,6 @@ public class CustomerComparatorByID implements Comparator<Customer> {
 
 	@Override
 	public int compare(Customer c1, Customer c2) {
-		if (c1.getCustomerID() < c2.getCustomerID()) {
-			return -1;
-		} else if (c1.getCustomerID() > c2.getCustomerID()) {
-			return 1;
-		} else {
-			return 0;
-		}
+		return c1.getCustomerID() - c2.getCustomerID();
 	}
 }

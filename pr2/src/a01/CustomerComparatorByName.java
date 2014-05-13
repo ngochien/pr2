@@ -25,17 +25,18 @@ public class CustomerComparatorByName implements Comparator<Customer> {
 	public int compare(Customer c1, Customer c2) {
 		int compareLastName = c1.getLastName().compareTo(c2.getLastName());
 		int compareFirstName = c1.getFirstName().compareTo(c2.getFirstName());
-		
-		if (compareLastName < 0) {
-			return -1;
-		} else if (compareLastName > 0) {
-			return 1;
-		} else if (compareFirstName < 0){
-			return -1;
-		} else if (compareFirstName > 0) {
-			return 1;
+
+		if (compareLastName != 0) {
+			return compareLastName;
 		} else {
-			return new CustomerComparatorByID().compare(c1, c2);
+			return compareFirstName;
 		}
+
+		/*
+		 * Whether we have to compare ID if two customers have the same last
+		 * name and first name or not, it depends on the definition of project.
+		 * 
+		 * <code>return new CustomerComparatorByID().compare(c1, c2);</code>
+		 */
 	}
 }
