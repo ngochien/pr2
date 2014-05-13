@@ -12,6 +12,8 @@
 package a02;
 
 /**
+ * A customer with a first name, a last name and a unique ID.
+ * 
  * @author Le
  * @author Nguyen
  */
@@ -71,11 +73,15 @@ public class Customer {
 		return customerID;
 	}
 
+	/**
+	 * @return last name and first name of this customer.
+	 */
 	public String getFullName() {
 		return getLastName() + " " + getFirstName();
 	}
+	
 	@Override
 	public String toString() {
-		return "ID " + getCustomerID() + " - " + getLastName() + ", " + getFirstName();
+		return "ID " + getCustomerID() + " - " + getFullName();
 	}
 }

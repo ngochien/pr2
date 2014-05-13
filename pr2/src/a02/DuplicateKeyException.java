@@ -10,6 +10,8 @@
 package a02;
 
 /**
+ * Thrown to indicate that a same key as the given key already exists.
+ * 
  * @author Le
  * @author Nguyen
  */

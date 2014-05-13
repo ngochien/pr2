@@ -10,7 +10,7 @@
 package a02;
 
 /**
- * A generic node in binary tree which contains a key and a value
+ * A generic node in binary tree which contains a key and a value.
  * 
  * @author Le
  * @author Nguyen
@@ -55,7 +55,7 @@ public class BinaryNode<K, V> {
 	}
 
 	/**
-	 * @param left the left to set
+	 * @param left the left node to set
 	 */
 	protected void setLeft(BinaryNode<K, V> left) {
 		this.left = left;
@@ -69,7 +69,7 @@ public class BinaryNode<K, V> {
 	}
 
 	/**
-	 * @param right the right to set
+	 * @param right the right node to set
 	 */
 	protected void setRight(BinaryNode<K, V> right) {
 		this.right = right;

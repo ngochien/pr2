@@ -12,6 +12,8 @@ package a02;
 import java.util.Comparator;
 
 /**
+ * Compares two strings lexicographically.
+ * 
  * @author Le
  * @author Nguyen
  */

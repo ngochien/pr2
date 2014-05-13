@@ -2,7 +2,7 @@
  * HAW Hamburg - Studiengang Wirtschaftsinformatik
  * Programmieren II - Wintersemester 2013/2014
  *
- * Aufgabenblatt 1
+ * Aufgabenblatt 2
  * 
  * ngochien.le@haw-hamburg.de
  * bichngoc.nguyen@haw-hamburg.de
@@ -17,6 +17,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
+ * Test class for BinaryTreeHelper.
+ * 
  * @author Le
  * @author Nguyen
  */

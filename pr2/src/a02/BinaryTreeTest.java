@@ -17,6 +17,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
+ * Test class for BinaryTree.
  * @author Le
  * @author Nguyen
  */
@@ -26,16 +27,14 @@ public class BinaryTreeTest {
 	private BinaryTree<String, Integer> tree = new BinaryTree<>(keyComparator);
 
 	private BinaryNode<String, Integer> nodeA = new BinaryNode<>("A", Integer.MIN_VALUE);
-	private BinaryNode<String, Integer> nodeB = new BinaryNode<>("B", 0);
-	private BinaryNode<String, Integer> nodeC = new BinaryNode<>("C", Integer.MAX_VALUE);
-
-	private BinaryNode<String, Integer> nodeBCopy = new BinaryNode<>("B", 0);
+	private BinaryNode<String, Integer> nodeB = new BinaryNode<>("B", Integer.MAX_VALUE);
+	private BinaryNode<String, Integer> nodeC = new BinaryNode<>("C", 0);
+	private BinaryNode<String, Integer> nodeCCopy = new BinaryNode<>("C", 0);
 
 	@Before
 	public void setUp() throws DuplicateKeyException {
 		tree.insert(nodeB);
 		tree.insert(nodeA);
-		tree.insert(nodeC);
 	}
 	/**
 	 * Test method for {@link a02.BinaryTree#insert(a02.BinaryNode)}.
@@ -43,10 +42,10 @@ public class BinaryTreeTest {
 	@Test
 	public void testInsert() {
 		try {
-			tree.insert(nodeBCopy);
+			tree.insert(nodeC);
+			tree.insert(nodeCCopy);
 			fail("DuplicateKeyException expected");
 		} catch (DuplicateKeyException e) {
-			e.printStackTrace();
 		}
 
 		assertEquals(nodeB, tree.getRoot());
@@ -60,8 +59,7 @@ public class BinaryTreeTest {
 	@Test
 	public void testSearch() {
 		assertTrue(Integer.MIN_VALUE == tree.search("A"));
-		assertTrue(0 == tree.search("B"));
-		assertTrue(Integer.MAX_VALUE == tree.search("C"));
+		assertTrue(Integer.MAX_VALUE == tree.search("B"));
 	}
 
 	/**
@@ -69,9 +67,8 @@ public class BinaryTreeTest {
 	 */
 	@Test
 	public void testToString() {
-		String tree = "B: 0\n" + "A: " + Integer.MIN_VALUE
-						+ "\nC: " + Integer.MAX_VALUE + "\n";
-
+		String tree = "B: " + Integer.MAX_VALUE + "\n"
+						+ "A: " + Integer.MIN_VALUE + "\n";
 		assertEquals(tree, this.tree.toString());
 	}
 }

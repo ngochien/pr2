@@ -10,6 +10,8 @@
 package a02;
 
 /**
+ * A product with name and price.
+ * 
  * @author Le
  * @author Nguyen
  */

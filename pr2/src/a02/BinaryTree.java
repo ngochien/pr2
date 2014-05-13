@@ -12,7 +12,8 @@ package a02;
 import java.util.Comparator;
 
 /**
- * A binary tree
+ * A binary tree.
+ * 
  * @author Le
  * @author Nguyen
  */
@@ -49,27 +50,27 @@ public class BinaryTree<K, V> {
 	}
 
 	/*
-	 * Private helper method. Inserts a new node into this tree beginning from a specified root node.
-	 * Return the specified root node with the new node inserted.
+	 * Private helper method. Inserts a new node into this tree beginning from a specified node.
+	 * Return the specified startNode with the new node inserted.
 	 */
-	private BinaryNode<K, V> insert(BinaryNode<K, V> root, BinaryNode<K, V> node) throws DuplicateKeyException {
-		if (root == null) {
-			root = node;
-			return root;
+	private BinaryNode<K, V> insert(BinaryNode<K, V> startNode, BinaryNode<K, V> newNode) throws DuplicateKeyException {
+		if (startNode == null) {
+			startNode = newNode;
+			return startNode;
 		} 
-		int compareKeys = keyComparator.compare(node.getKey(), root.getKey());
+		int compareKeys = keyComparator.compare(newNode.getKey(), startNode.getKey());
 		if (compareKeys < 0) {
-			root.setLeft(insert(root.getLeft(), node));
+			startNode.setLeft(insert(startNode.getLeft(), newNode));
 		} else if (compareKeys > 0) {
-			root.setRight(insert(root.getRight(), node));
+			startNode.setRight(insert(startNode.getRight(), newNode));
 		} else {
 			throw new DuplicateKeyException("Duplicates are not allowed");
 		}
-		return root;
+		return startNode;
 	}
 	
 	/**
-	 * Searches for a value with the specified given key.
+	 * Searches for a value with the given key.
 	 * 
 	 * @param key	the key whose value to be searched
 	 * @return	value of the node with specified key.
@@ -83,18 +84,18 @@ public class BinaryTree<K, V> {
 	 * Private helper method. Begins search for a value with the given key from a specified node.
 	 * Return null if no node found.
 	 */
-	private V search(BinaryNode<K, V> node, K key) {
-		if (node == null) {
+	private V search(BinaryNode<K, V> startNode, K key) {
+		if (startNode == null) {
 			return null;
 		}
 		
-		int compareKeys = keyComparator.compare(key, node.getKey());
+		int compareKeys = keyComparator.compare(key, startNode.getKey());
 		if ( compareKeys < 0) {
-			return search(node.getLeft(), key);
+			return search(startNode.getLeft(), key);
 		} else if (compareKeys > 0) {
-			return search(node.getRight(), key);
+			return search(startNode.getRight(), key);
 		} else {
-			return node.getValue();
+			return startNode.getValue();
 		}
 	}
 	
