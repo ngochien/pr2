@@ -77,13 +77,13 @@ public class BinaryNode<K, V> {
 
 	@Override
 	public String toString() {
-		String result = key + ": " + value + "\n";
+		String node = key + ": " + value + "\n";
 		if (left != null) {
-			result += left.toString();
+			node += left.toString();
 		}
 		if (right != null) {
-			result += right.toString();
+			node += right.toString();
 		}
-		return result;
+		return node;
 	}
 }

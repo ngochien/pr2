@@ -15,10 +15,18 @@ package a02;
  */
 public class BinaryTreeHelper {
 
+	/**
+	 * Counts number of nodes in a binary tree.
+	 * @param tree	the binary tree whose nodes to be counted.
+	 * @return number of nodes in the given tree.
+	 */
 	public static <K, V> int countNodes(BinaryTree<K, V> tree) {
 		return countNodes(tree.getRoot());
 	}
 
+	/*
+	 * Private helper method. Counts all children of a specified node, including the given node.
+	 */
 	private static <K, V> int countNodes(BinaryNode<K, V> node) {
 		if (node == null) {
 			return 0;
