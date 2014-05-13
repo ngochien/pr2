@@ -25,6 +25,8 @@ public class WebShop {
 	private List<Customer> customers = new ArrayList<Customer>();
 
 	/**
+	 * Add a customer with firstName and lastName
+	 * 
 	 * @param firstName
 	 * @param lastName
 	 */
@@ -52,6 +54,8 @@ public class WebShop {
 	}
 
 	/**
+	 * Print information of all customers : last name, fist name and ID
+	 * 
 	 * @param s sorting criterion
 	 */
 	public void printListOfCustomers(SortingCriterion s) {
