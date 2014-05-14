@@ -55,7 +55,8 @@ public class BinaryNode<K, V> {
 	}
 
 	/**
-	 * @param left the left node to set
+	 * @param left
+	 *            the left node to set
 	 */
 	protected void setLeft(BinaryNode<K, V> left) {
 		this.left = left;
@@ -69,7 +70,8 @@ public class BinaryNode<K, V> {
 	}
 
 	/**
-	 * @param right the right node to set
+	 * @param right
+	 *            the right node to set
 	 */
 	protected void setRight(BinaryNode<K, V> right) {
 		this.right = right;

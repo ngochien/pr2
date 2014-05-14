@@ -27,22 +27,22 @@ public class BinaryTreeHelperTest {
 	private Comparator<String> keyComparator = new StringComparator();
 	private BinaryTree<String, Integer> tree = new BinaryTree<>(keyComparator);
 
-	private BinaryNode<String, Integer> s = new BinaryNode<>("S", 0);
-	private BinaryNode<String, Integer> e = new BinaryNode<>("E", 1);
-	private BinaryNode<String, Integer> a = new BinaryNode<>("A", 2);
-	private BinaryNode<String, Integer> r = new BinaryNode<>("R", 3);
-	private BinaryNode<String, Integer> c = new BinaryNode<>("C", 4);
-	private BinaryNode<String, Integer> h = new BinaryNode<>("H", 5);
+//	private BinaryNode<String, Integer> s = new BinaryNode<>("S", 0);
+//	private BinaryNode<String, Integer> e = new BinaryNode<>("E", 1);
+//	private BinaryNode<String, Integer> a = new BinaryNode<>("A", 2);
+//	private BinaryNode<String, Integer> r = new BinaryNode<>("R", 3);
+//	private BinaryNode<String, Integer> c = new BinaryNode<>("C", 4);
+//	private BinaryNode<String, Integer> h = new BinaryNode<>("H", 5);
 
 	@Before
 	public void setUp() {
 		try {
-			tree.insert(s);
-			tree.insert(e);
-			tree.insert(a);
-			tree.insert(r);
-			tree.insert(c);
-			tree.insert(h);
+			tree.insert("S", 0);
+			tree.insert("E", 1);
+			tree.insert("A", 2);
+			tree.insert("R", 3);
+			tree.insert("C", 4);
+			tree.insert("H", 5);
 		} catch (DuplicateKeyException e) {
 			e.printStackTrace();
 		}

@@ -26,15 +26,15 @@ public class BinaryTreeTest {
 	private Comparator<String> keyComparator = new StringComparator();
 	private BinaryTree<String, Integer> tree = new BinaryTree<>(keyComparator);
 
-	private BinaryNode<String, Integer> nodeA = new BinaryNode<>("A", Integer.MIN_VALUE);
-	private BinaryNode<String, Integer> nodeB = new BinaryNode<>("B", Integer.MAX_VALUE);
-	private BinaryNode<String, Integer> nodeC = new BinaryNode<>("C", 0);
-	private BinaryNode<String, Integer> nodeCCopy = new BinaryNode<>("C", 0);
+//	private BinaryNode<String, Integer> nodeA = new BinaryNode<>("A", Integer.MIN_VALUE);
+//	private BinaryNode<String, Integer> nodeB = new BinaryNode<>("B", Integer.MAX_VALUE);
+//	private BinaryNode<String, Integer> nodeC = new BinaryNode<>("C", 0);
+//	private BinaryNode<String, Integer> nodeCCopy = new BinaryNode<>("C", 0);
 
 	@Before
 	public void setUp() throws DuplicateKeyException {
-		tree.insert(nodeB);
-		tree.insert(nodeA);
+		tree.insert("B", Integer.MAX_VALUE);
+		tree.insert("A", Integer.MIN_VALUE);
 	}
 	/**
 	 * Test method for {@link a02.BinaryTree#insert(a02.BinaryNode)}.
@@ -42,15 +42,15 @@ public class BinaryTreeTest {
 	@Test
 	public void testInsert() {
 		try {
-			tree.insert(nodeC);
-			tree.insert(nodeCCopy);
+			tree.insert("C", 0);
+			tree.insert("C", 0);
 			fail("DuplicateKeyException expected");
 		} catch (DuplicateKeyException e) {
 		}
 
-		assertEquals(nodeB, tree.getRoot());
-		assertEquals(nodeA, tree.getRoot().getLeft());
-		assertEquals(nodeC, tree.getRoot().getRight());
+		assertEquals("B", tree.getRoot().getKey());
+		assertEquals("A", tree.getRoot().getLeft().getKey());
+		assertEquals("C", tree.getRoot().getRight().getKey());
 	}
 
 	/**

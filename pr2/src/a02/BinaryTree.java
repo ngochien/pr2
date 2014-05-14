@@ -45,7 +45,9 @@ public class BinaryTree<K, V> {
 	 * @param node	the node to be inserted
 	 * @throws DuplicateKeyException	if a node with the same key already exists
 	 */
-	public void insert(BinaryNode<K, V> node) throws DuplicateKeyException {
+	public void insert(K key, V value) throws DuplicateKeyException {
+		BinaryNode<K, V> node = new BinaryNode<>(key, value);
+	//public void insert(BinaryNode<K, V> node) throws DuplicateKeyException {
 		root = insert(root, node);
 	}
 
@@ -81,7 +83,8 @@ public class BinaryTree<K, V> {
 	}
 	
 	/*
-	 * Private helper method. Begins search for a value with the given key from a specified node.
+	 * Private helper method. Begins search for a value with the given key f
+	 * rom a specified node.
 	 * Return null if no node found.
 	 */
 	private V search(BinaryNode<K, V> startNode, K key) {

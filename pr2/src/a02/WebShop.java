@@ -33,8 +33,8 @@ public class WebShop {
 	 */
 	public void addCustomer(String firstName, String lastName) throws DuplicateKeyException {
 		Customer newCustomer = new Customer(firstName, lastName);
-		BinaryNode<String, Customer> newNode= new BinaryNode<>(newCustomer.getFullName(), newCustomer);
-		customers.insert(newNode);
+//		BinaryNode<String, Customer> newNode= new BinaryNode<>(newCustomer.getFullName(), newCustomer);
+		customers.insert(newCustomer.getFullName(), newCustomer);
 	}
 
 	/**
@@ -58,8 +58,8 @@ public class WebShop {
 	 */
 	public void addProduct(String name, double price) throws DuplicateKeyException {
 		Product newProduct = new Product(name, price);
-		BinaryNode<String, Product> newNode =  new BinaryNode<>(newProduct.getName(), newProduct);
-		products.insert(newNode);
+//		BinaryNode<String, Product> newNode =  new BinaryNode<>(newProduct.getName(), newProduct);
+		products.insert(newProduct.getName(), newProduct);
 	}
 	
 	/**
