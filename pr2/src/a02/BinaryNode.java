@@ -81,10 +81,10 @@ public class BinaryNode<K, V> {
 	public String toString() {
 		String node = key + ": " + value + "\n";
 		if (left != null) {
-			node += left.toString();
+			node += left;
 		}
 		if (right != null) {
-			node += right.toString();
+			node += right;
 		}
 		return node;
 	}

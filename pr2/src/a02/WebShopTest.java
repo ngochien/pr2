@@ -30,19 +30,21 @@ public class WebShopTest {
 			webShop.addCustomer("Hansi", "Flick");
 			webShop.addCustomer("Snow", "John");
 			webShop.addCustomer("Marco", "Reus");
-			webShop.printAllCustomers();
+//			webShop.printAllCustomers();
 
-			webShop.addProduct("Stuhl", 20);
-			webShop.addProduct("Tisch", 49);
-			webShop.addProduct("Regal", 34.99);
-			webShop.addProduct("Schrank", 89.99);
-			webShop.PrintAllProducts();
+//			webShop.addProduct("Stuhl", 20);
+//			webShop.addProduct("Tisch", 49);
+//			webShop.addProduct("Regal", 34.99);
+//			webShop.addProduct("Schrank", 89.99);
+//			webShop.PrintAllProducts();
 
 		} catch (DuplicateKeyException e) {
 			e.printStackTrace();
 		}
 
-		System.out.println(webShop.getCustomer("Scholl", "Mehmet"));
-		System.out.println(webShop.getProduct("Tisch"));
+//		System.out.println(webShop.getCustomer("Scholl", "Mehmet"));
+//		System.out.println(webShop.getProduct("Tisch"));
+		System.out.println(BinaryTreeHelper.random(webShop.getCustomers()).getKey());
+		System.out.println(BinaryTreeHelper.random(webShop.getCustomers()).getKey());
 	}
 }

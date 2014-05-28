@@ -23,6 +23,9 @@ public class WebShop {
 	
 	private BinaryTree<String, Product> products = new BinaryTree<>(new StringComparator());
 
+	public BinaryTree<String, Customer> getCustomers() {
+		return customers;
+	}
 	/**
 	 * Adds a customer with firstName and lastName.
 	 * 
