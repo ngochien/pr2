@@ -31,7 +31,7 @@ public class Simulation {
 	 */
 	public static void main(String[] args) {
 		new Simulation().start();
-		System.out.println("---------------Simulation done--------------");
+		System.out.println("--------------------Simulation done-------------------");
 	}
 
 	/**
@@ -48,9 +48,9 @@ public class Simulation {
 		OrderCancel cancelTask = new OrderCancel(buffer);
 
 		// Creates needed threads and timer for the simulation.
-		Thread shopThread = new Thread(shop, "Web shop");
-		Thread generatorThread = new Thread(generator, "Generator");
-		Timer cancelTimer = new Timer("Canceler");
+		Thread shopThread = new Thread(shop, "Webshop-Thread");
+		Thread generatorThread = new Thread(generator, "Generator-Thread");
+		Timer cancelTimer = new Timer("Cancel-Thread");
 		
 		// Start all the created threads and timer.
 		shopThread.start();
