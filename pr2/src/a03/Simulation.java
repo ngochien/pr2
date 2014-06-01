@@ -50,7 +50,7 @@ public class Simulation {
 		generatorThread.start();
 
 		Timer ruinerTimer = new Timer("Ruiner");
-		ruinerTimer.schedule(ruiner, 0, OrderCancel.CANCELLING_PERIOD);
+		ruinerTimer.schedule(ruiner, OrderCancel.CANCELLING_PERIOD, OrderCancel.CANCELLING_PERIOD);
 
 		try {
 			shopThread.join();

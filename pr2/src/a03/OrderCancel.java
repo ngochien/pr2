@@ -15,7 +15,7 @@ import java.util.TimerTask;
  */
 public class OrderCancel extends TimerTask {
 
-	public static final int CANCELLING_PERIOD = 1200;
+	public static final int CANCELLING_PERIOD = 12;
 
 	private BoundedBuffer<Order> buffer;
 
@@ -28,10 +28,11 @@ public class OrderCancel extends TimerTask {
 
 	@Override
 	public void run() {
-//		if (WebShop.processedOrder < Simulation.NUM_OF_ORDERS) {
-//			Order order = buffer.take();
-//			System.out.println("Cancelled: " + order);
-//			WebShop.processedOrder++;
-//		}
+		synchronized (buffer) {
+			if (buffer.getNumOfRemovedElements() < Simulation.NUM_OF_ORDERS) {
+				Order order = buffer.take();
+				System.out.println("Cancelled:    " + order);
+			}
+		}
 	}
 }

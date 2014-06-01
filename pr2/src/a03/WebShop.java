@@ -18,15 +18,13 @@ package a03;
  * @author Nguyen
  */
 public class WebShop implements Runnable {
-	
-	public static final int PROCESSING_TIME = 1000;
+
+	public static final int PROCESSING_TIME = 10;
 
 	private BinaryTree<String, Customer> customers;
 	private BinaryTree<String, Product> products;
-	
+
 	private BoundedBuffer<Order> buffer;
-	
-	private static int processedOrder;
 
 	/**
 	 * @param buffer
@@ -41,16 +39,22 @@ public class WebShop implements Runnable {
 
 	@Override
 	public void run() {
+		Order order;
 		while (!Thread.currentThread().isInterrupted()) {
-			Order order = buffer.take();
+			synchronized (buffer) {
+				if (buffer.getNumOfRemovedElements() < Simulation.NUM_OF_ORDERS) {
+					order = buffer.take();
+				} else {
+					return;
+				}
+			}
 			try {
 				Thread.sleep(PROCESSING_TIME);
-				System.out.println("Successfully processed: " + order);
+				System.out.println("Successfully: " + order);
 			} catch (InterruptedException e) {
 				Thread.currentThread().interrupt();
 				e.printStackTrace();
 			}
-			processedOrder++;
 		}
 	}
 

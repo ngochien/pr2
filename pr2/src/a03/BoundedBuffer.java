@@ -22,12 +22,23 @@ public class BoundedBuffer<E> {
 	private int size;
 	private List<E> buffer;
 	
+	private int numOfAddedElements;
+	private int numOfRemovedElements;
+	
 	/**
 	 * @param size	the number of elements that the buffer can hold.
 	 */
 	public BoundedBuffer(int size) {
 		this.size = size;
 		this.buffer = new LinkedList<E>();
+	}
+	
+	public synchronized int getNumOfAddedElements() {
+		return numOfAddedElements;
+	}
+	
+	public synchronized int getNumOfRemovedElements() {
+		return numOfRemovedElements;
 	}
 	
 	public synchronized boolean isEmpty() {
@@ -48,6 +59,7 @@ public class BoundedBuffer<E> {
 			}
 		}
 		buffer.add(element);
+		numOfAddedElements++;
 		notifyAll();
 	}
 	
@@ -66,6 +78,7 @@ public class BoundedBuffer<E> {
 			}
 		}
 		E element = buffer.remove(0);
+		numOfRemovedElements++;
 		notifyAll();
 		return element;
 	}

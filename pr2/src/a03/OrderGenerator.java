@@ -23,10 +23,11 @@ public class OrderGenerator implements Runnable {
 
 	@Override
 	public void run() {
-		// while (!Thread.currentThread().isInterrupted()) {
-		for (int i = 0; i < Simulation.NUM_OF_ORDERS; i++) {
-			Order order = generateOrder();
-			buffer.put(order);
+		synchronized (buffer) {
+			while (buffer.getNumOfAddedElements() < Simulation.NUM_OF_ORDERS) {
+				Order order = generateOrder();
+				buffer.put(order);
+			}
 		}
 	}
 
