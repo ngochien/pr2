@@ -1,12 +1,11 @@
-/**
- * HAW Hamburg - Studiengang Wirtschaftsinformatik
- * Programmieren II - Wintersemester 2013/2014
+/*
+ * Hamburg University of Applied Sciences
  *
- * Aufgabenblatt 1
- * 
+ * Programming assignments
+ *
  * ngochien.le@haw-hamburg.de
- * bichngoc.nguyen@haw-hamburg.de
  */
+
 package a03;
 
 /**
@@ -17,10 +16,20 @@ package a03;
  */
 public class DuplicateKeyException  extends Exception {
 
+	private static final long serialVersionUID = -133053552643765332L;
+
+	/**
+	 * Constructs a duplicate key exception with no detail message.
+	 */
 	public DuplicateKeyException() {
 		super();
 	}
 	
+	/**
+	 * Constructs a duplicate key exception with the specified detail message.
+	 * 
+	 * @param message the detail message.
+	 */
 	public DuplicateKeyException(String message) {
 		super(message);
 	}

@@ -1,12 +1,11 @@
-/**
- * HAW Hamburg - Studiengang Wirtschaftsinformatik
- * Programmieren II - Wintersemester 2013/2014
+/*
+ * Hamburg University of Applied Sciences
  *
- * Aufgabenblatt 1
- * 
+ * Programming assignments
+ *
  * ngochien.le@haw-hamburg.de
- * bichngoc.nguyen@haw-hamburg.de
  */
+
 package a03;
 
 /**
@@ -20,15 +19,31 @@ public class Product {
 	private String name;
 	private double price;
 	
+	/**
+	 * Constructs a product with the given name and price.
+	 * 
+	 * @param name name of the product to be created.
+	 * @param price price of the product to be created.
+	 */
 	public Product(String name, double price) {
 		this.name = name;
 		this.price = price;
 	}
 	
+	/**
+	 * Returns name of this product.
+	 * 
+	 * @return name of this product.
+	 */
 	public String getName() {
 		return name;
 	}
 	
+	/**
+	 * Returns price of this product.
+	 * 
+	 * @return price of this product.
+	 */
 	public double getPrice() {
 		return price;
 	}

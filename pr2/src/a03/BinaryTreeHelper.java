@@ -1,41 +1,41 @@
-/**
- * HAW Hamburg - Studiengang Wirtschaftsinformatik
- * Programmieren II - Wintersemester 2013/2014
+/*
+ * Hamburg University of Applied Sciences
  *
- * Aufgabenblatt 1
- * <p>
+ * Programming assignments
+ *
  * ngochien.le@haw-hamburg.de
- * bichngoc.nguyen@haw-hamburg.de
  */
+
 package a03;
 
 /**
+ * The class contains methods for performing some operations on a binary tree.
+ * 
  * @author Le
  * @author Nguyen
  */
 public class BinaryTreeHelper {
 
-    /* 
+    /** 
      * Number of the visited nodes while traversing a binary tree.
-     * It's strongly recommended that each method should reset this counter to zero
-     * before using it.
+     * Each method must reset this counter to zero before using it.
      */
     private static int counter;
 
     /**
-     * Counts number of nodes in a binary tree.
+     * Counts the nodes in a binary tree.
      * <p>
-     * @param tree	the binary tree whose nodes to be counted.
+     * @param tree the binary tree whose nodes to be counted.
      * <p>
-     * @return number of nodes in the given tree.
+     * @return number of nodes in the given binary tree.
      */
     public static <K, V> int countNodes(BinaryTree<K, V> tree) {
         return countNodes(tree.getRoot());
     }
 
-    /*
+    /**
      * Private helper method. 
-     * Counts and returns number of all children of a specified node, including itself.
+     * Counts all children of a specified binary node, including itself.
      */
     private static <K, V> int countNodes(BinaryNode<K, V> node) {
         if (node == null) {
@@ -48,17 +48,17 @@ public class BinaryTreeHelper {
     /**
      * Finds the depth of a binary tree.
      * <p>
-     * @param tree	the binary tree whose depth to be computed.
+     * @param tree the binary tree whose depth to be computed.
      * <p>
-     * @return	the depth of the given binary tree.
+     * @return the depth of the given binary tree.
      */
     public static <K, V> int depth(BinaryTree<K, V> tree) {
         return depth(tree.getRoot());
     }
 
-    /*
-     * Private helper method. Caculates the depth of a subtree whose root node
-     * is the specified node.
+    /**
+     * Private helper method.
+     * Caculates the depth of a binary subtree whose root node is the specified node.
      */
     private static <K, V> int depth(BinaryNode<K, V> node) {
         if (node == null) {
@@ -74,7 +74,7 @@ public class BinaryTreeHelper {
      * <p>
      * @param tree the binary tree from which a node will be randomly picked.
      * <p>
-     * @return a random node from the given binary tree.
+     * @return a node of the given binary tree.
      */
     public static <K, V> BinaryNode<K, V> random(BinaryTree<K, V> tree) {
         counter = 0;
@@ -82,9 +82,9 @@ public class BinaryTreeHelper {
         return getNode(tree.getRoot(), random);
     }
 
-    /*
-     * Private helper method. Traverses a binary tree in pre-order until
-     * reaching the k.th node and returns it.
+    /**
+     * Private helper method.
+     * Traverses a binary tree in pre-order until reaching the k.th node and returns it.
      */
     private static <K, V> BinaryNode<K, V> getNode(BinaryNode<K, V> node, int k) {
         BinaryNode<K, V> currentNode = node;
@@ -101,8 +101,11 @@ public class BinaryTreeHelper {
         return currentNode;
     }
 
-    /* Another version without recursion to get the k.th node of a binary tree */
-    private static <K, V> void find(BinaryNode<K, V> node, int k) {
+    /**
+     * Another method without recursion to get the k.th node of a binary tree.
+     */
+    @SuppressWarnings("unused")
+	private static <K, V> void find(BinaryNode<K, V> node, int k) {
         java.util.Stack<BinaryNode<K, V>> stack = new java.util.Stack<>();
         BinaryNode<K, V> current = node;
         int tmp = k;

@@ -1,24 +1,24 @@
-/**
- * HAW Hamburg - Studiengang Wirtschaftsinformatik
- * Programmieren II - Wintersemester 2013/2014
+/*
+ * Hamburg University of Applied Sciences
  *
- * Aufgabenblatt 1
- * 
+ * Programming assignments
+ *
  * ngochien.le@haw-hamburg.de
- * bichngoc.nguyen@haw-hamburg.de
- * 
  */
 
 package a03;
 
 /**
- * A customer with a first name, a last name and a unique ID.
+ * A customer whose has a unique ID, a first name and a last name.
  * 
  * @author Le
  * @author Nguyen
  */
 public class Customer {
 
+	/**
+	 * Number of created customer objects.
+	 */
 	private static int customerCounter = 0;
 	
 	/**
@@ -37,7 +37,11 @@ public class Customer {
 	private final int customerID;
 
 	/**
-	 * Constructor
+	 * Constructs a customer with the given first name and last name.
+	 * The unique customer ID is automatic generated.
+	 * 
+	 * @param firstName first name of the customer.
+	 * @param lastName last name of the customer.
 	 */
 	public Customer(String firstName, String lastName) {
 		this.firstName = firstName;
@@ -47,34 +51,36 @@ public class Customer {
 	}
 
 	/**
-	 * Getter
+	 * Returns first name of this customer.
 	 * 
-	 * @return firstName
+	 * @return firstName the first name of this customer.
 	 */
 	public String getFirstName() {
 		return firstName;
 	}
 
 	/**
-	 * Getter
+	 * Returns last name of this customer.
 	 * 
-	 * @return lastName
+	 * @return lastName the last name of this customer.
 	 */
 	public String getLastName() {
 		return lastName;
 	}
 
 	/**
-	 * Getter
+	 * Returns the unique customer ID.
 	 * 
-	 * @return customerID
+	 * @return customerID ID of this customer.
 	 */
 	public int getCustomerID() {
 		return customerID;
 	}
 
 	/**
-	 * @return last name and first name of this customer.
+	 * Returns the full name of this customer in the form "LastName FirstName".
+	 * 
+	 * @return a string that contains full name of this customer in the specified form.
 	 */
 	public String getFullName() {
 		return getLastName() + " " + getFirstName();

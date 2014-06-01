@@ -1,10 +1,11 @@
-/**
+/*
  * Hamburg University of Applied Sciences
  *
  * Programming assignments
  *
  * ngochien.le@haw-hamburg.de
  */
+
 package a03;
 
 /**
@@ -15,12 +16,21 @@ package a03;
  */
 public class Order {
 
+	/**
+	 * The customer who gives order.
+	 */
 	private Customer customer;
+	
+	/**
+	 * The product to be ordered. 
+	 */
 	private Product product;
 	
 	/**
-	 * @param customer	the customer who gives order.
-	 * @param product	the ordered product.
+	 * Constructs an order of the specified customer with the given product.
+	 * 
+	 * @param customer the customer who gives order.
+	 * @param product the ordered product.
 	 */
 	public Order(Customer customer, Product product) {
 		this.customer = customer;
@@ -28,6 +38,8 @@ public class Order {
 	}
 
 	/**
+	 * Returns the customer who has ordered.
+	 * 
 	 * @return the customer who gave this order.
 	 */
 	public Customer getCustomer() {
@@ -35,6 +47,8 @@ public class Order {
 	}
 
 	/**
+	 * Returns the ordered product.
+	 * 
 	 * @return the ordered product.
 	 */
 	public Product getProduct() {

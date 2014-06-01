@@ -1,12 +1,11 @@
-/**
- * HAW Hamburg - Studiengang Wirtschaftsinformatik
- * Programmieren II - Wintersemester 2013/2014
+/*
+ * Hamburg University of Applied Sciences
  *
- * Aufgabenblatt 2
- * <p>
+ * Programming assignments
+ *
  * ngochien.le@haw-hamburg.de
- * bichngoc.nguyen@haw-hamburg.de
  */
+
 package a03;
 
 /**
@@ -23,10 +22,10 @@ public class BinaryNode<K, V> {
     private BinaryNode<K, V> right;
 
     /**
-     * Constructor
+     * Constructs a binary node with the specified key and value.
      * <p>
-     * @param key
-     * @param value
+     * @param key the key element of the binary node.
+     * @param value the value of the binary node.
      */
     public BinaryNode(K key, V value) {
         this.key = key;
@@ -34,44 +33,54 @@ public class BinaryNode<K, V> {
     }
 
     /**
-     * @return the key
+     * Returns the key of this binary node.
+     * 
+     * @return the key of this binary node.
      */
     public K getKey() {
         return key;
     }
 
     /**
-     * @return the value
+     * Returns the value of this binary node.
+     * 
+     * @return the value of this binary node. 
      */
     public V getValue() {
         return value;
     }
 
     /**
-     * @return the left
+     * Returns the left node of this binary node.
+     * 
+     * @return the left node.
      */
     public BinaryNode<K, V> getLeft() {
         return left;
     }
 
     /**
-     * @param left
-     *             the left node to set
+     * Sets the left node of this binary node. 
+     * 
+     * @param left the left node to set.
      */
     protected void setLeft(BinaryNode<K, V> left) {
         this.left = left;
     }
 
     /**
-     * @return the right
+     * Returns the right node of this binary node.
+     * 
+     * @return the right node.
      */
     public BinaryNode<K, V> getRight() {
         return right;
     }
 
     /**
-     * @param right
-     *              the right node to set
+     * Sets the right node of this binary node. 
+     * 
+     * @param right the right node to set
      */
     protected void setRight(BinaryNode<K, V> right) {
         this.right = right;

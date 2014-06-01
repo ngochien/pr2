@@ -1,12 +1,9 @@
-/**
- * HAW Hamburg - Studiengang Wirtschaftsinformatik
- * Programmieren II - Wintersemester 2013/2014
+/*
+ * Hamburg University of Applied Sciences
  *
- * Aufgabenblatt 1
- * 
+ * Programming assignments
+ *
  * ngochien.le@haw-hamburg.de
- * bichngoc.nguyen@haw-hamburg.de
- * 
  */
 
 package a03;
@@ -19,17 +16,31 @@ package a03;
  */
 public class WebShop implements Runnable {
 
-	public static final int PROCESSING_TIME = 10;
+	/**
+	 * Time needed to process an order.
+	 */
+	public static final int PROCESSING_TIME = 1000;
 
+	/**
+	 * Saves all customers to a binary tree.
+	 */
 	private BinaryTree<String, Customer> customers;
+	
+	/**
+	 * Saves all products to a binary tree.
+	 */
 	private BinaryTree<String, Product> products;
 
+	/**
+	 * A bounded buffer which stores all orders of this web shop.
+	 */
 	private BoundedBuffer<Order> buffer;
 
 	/**
-	 * @param buffer
-	 *            the buffer from which the web shop picks an order and
-	 *            processes it.
+	 * 
+	 * Constructs a web shop whose orders are stored in the given bounded buffer.
+	 * 
+	 * @param buffer the bounded buffer that stores orders.
 	 */
 	public WebShop(BoundedBuffer<Order> buffer) {
 		this.buffer = buffer;
@@ -39,23 +50,45 @@ public class WebShop implements Runnable {
 
 	@Override
 	public void run() {
-		Order order;
 		while (!Thread.currentThread().isInterrupted()) {
+			Order order;
+			
+			/* While checking number of removed elements and trying to remove an
+			 * order from the bounded buffer, other threads are not allowed to
+			 * access this buffer, or it may lead to inconsistent states.
+			 * Here : enter critical section -> synchronized.
+			 */
 			synchronized (buffer) {
 				if (buffer.getNumOfRemovedElements() < Simulation.NUM_OF_ORDERS) {
 					order = buffer.take();
 				} else {
+					/*
+					 * When all orders needed for the simulation have been removed
+					 * from the buffer, exits the run method.
+					 */
+					System.out.println(Thread.currentThread().getName() + " - Exiting");
 					return;
 				}
 			}
-			try {
-				Thread.sleep(PROCESSING_TIME);
-				System.out.println("Successfully: " + order);
-			} catch (InterruptedException e) {
-				Thread.currentThread().interrupt();
-				e.printStackTrace();
-			}
+			processOrder(order);
 		}
+	}
+
+	/**
+	 * @param order
+	 */
+	public synchronized void processOrder(Order order) {
+		/*
+		 * Only one order can be processed at a time -> synchronized.
+		 */
+//		System.out.println(Thread.currentThread().getName() + " - Processing " + order);
+		try {
+			Thread.sleep(PROCESSING_TIME);
+		} catch (InterruptedException e) {
+			Thread.currentThread().interrupt();
+			e.printStackTrace();
+		}
+		System.out.println("Successfully: " + order);
 	}
 
 	/**
@@ -79,8 +112,8 @@ public class WebShop implements Runnable {
 	/**
 	 * Finds the customer with the given first name and last name.
 	 * 
-	 * @param firstName
-	 * @param lastName
+	 * @param firstName first name of the searched customer.
+	 * @param lastName last name of the searched customer.
 	 * @return the customer with the specified name, null if not found.
 	 */
 	public Customer getCustomer(String firstName, String lastName) {
@@ -90,14 +123,12 @@ public class WebShop implements Runnable {
 	/**
 	 * Adds a customer with firstName and lastName.
 	 * 
-	 * @param firstName
-	 * @param lastName
+	 * @param firstName first name of the customer to be added.
+	 * @param lastName last name of the customer to be added.
 	 * @throws DuplicateKeyException
-	 *             if a customer with the same first name and last name already
-	 *             exists.
+	 * 				if a customer with the same first name and last name already exists.
 	 */
-	public void addCustomer(String firstName, String lastName)
-			throws DuplicateKeyException {
+	public void addCustomer(String firstName, String lastName) throws DuplicateKeyException {
 		Customer customer = new Customer(firstName, lastName);
 		customers.insert(customer.getFullName(), customer);
 	}
@@ -123,7 +154,7 @@ public class WebShop implements Runnable {
 	/**
 	 * Finds the product with the given name.
 	 * 
-	 * @param name
+	 * @param name name of the searched product.
 	 * @return the product with the given name, null if not found.
 	 */
 	public Product getProduct(String name) {
@@ -131,21 +162,20 @@ public class WebShop implements Runnable {
 	}
 
 	/**
-	 * Adds a product which has the given name and price.
+	 * Adds a product with the given name and price.
 	 * 
-	 * @param name
-	 * @param price
+	 * @param name name of the product to be added.
+	 * @param price price of the product to be added.
 	 * @throws DuplicateKeyException
 	 *             if a product with the same name and price already exists.
 	 */
-	public void addProduct(String name, double price)
-			throws DuplicateKeyException {
+	public void addProduct(String name, double price) throws DuplicateKeyException {
 		Product product = new Product(name, price);
 		products.insert(product.getName(), product);
 	}
 
 	/**
-	 * Prints all customers of this web shop to console.
+	 * Prints all customers shop to console.
 	 */
 	public void printAllCustomers() {
 		System.out.println("All customers:");
@@ -154,7 +184,7 @@ public class WebShop implements Runnable {
 	}
 
 	/**
-	 * Prints all products of this web shop to console.
+	 * Prints all products to console.
 	 */
 	public void printAllProducts() {
 		System.out.println("All products:");
@@ -167,5 +197,4 @@ public class WebShop implements Runnable {
 		return customers + "\n" + products + "\n"
 				+ "------------------------------";
 	}
-
 }
