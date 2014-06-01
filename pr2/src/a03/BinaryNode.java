@@ -7,7 +7,7 @@
  * ngochien.le@haw-hamburg.de
  * bichngoc.nguyen@haw-hamburg.de
  */
-package a02;
+package a03;
 
 /**
  * A generic node in binary tree which contains a key and a value.

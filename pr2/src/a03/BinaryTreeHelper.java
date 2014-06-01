@@ -7,7 +7,7 @@
  * ngochien.le@haw-hamburg.de
  * bichngoc.nguyen@haw-hamburg.de
  */
-package a02;
+package a03;
 
 /**
  * @author Le
@@ -70,7 +70,7 @@ public class BinaryTreeHelper {
     }
 
     /**
-     * Returns randomly a node of a binary tree.
+     * Returns randomly a node in a binary tree.
      * <p>
      * @param tree the binary tree from which a node will be randomly picked.
      * <p>
@@ -104,7 +104,6 @@ public class BinaryTreeHelper {
     /* Another version without recursion to get the k.th node of a binary tree */
     private static <K, V> void find(BinaryNode<K, V> node, int k) {
         java.util.Stack<BinaryNode<K, V>> stack = new java.util.Stack<>();
-
         BinaryNode<K, V> current = node;
         int tmp = k;
 

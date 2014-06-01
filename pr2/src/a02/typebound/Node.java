@@ -7,10 +7,10 @@
  * ngochien.le@haw-hamburg.de
  * bichngoc.nguyen@haw-hamburg.de
  */
-package typebound;
+package a02.typebound;
 
 /**
- * Andere Möglichkeit für Typeinschränkung.
+ * Andere Mï¿½glichkeit fï¿½r Typeinschrï¿½nkung.
  * 
  * @author Le
  * @author Nguyen
@@ -26,8 +26,8 @@ public class Node {
 	 * 			element = new Integer(aNumber);			// OK
 	 * 
 	 * Nachteile :
-	 * 		- Keine weitere Einschränkungen möglich.
-	 * 		- Verschiedene Elementtypen innerhalb eines Baums möglich.
+	 * 		- Keine weitere Einschrï¿½nkungen mï¿½glich.
+	 * 		- Verschiedene Elementtypen innerhalb eines Baums mï¿½glich.
 	 * 		...
 	 */
 

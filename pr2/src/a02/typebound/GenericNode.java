@@ -7,10 +7,10 @@
  * ngochien.le@haw-hamburg.de
  * bichngoc.nguyen@haw-hamburg.de
  */
-package typebound;
+package a02.typebound;
 
 /**
- * Typeinschränkung mit Generic.
+ * Typeinschrï¿½nkung mit Generic.
  * @author Le
  * @author Nguyen
  */
@@ -20,16 +20,16 @@ public class GenericNode<T extends Number> {
 	
 	/*
 	 * Vorteile :
-	 * 	- Compiler überprüft Typen, mehrere Elementtypen innerhalb eines Baums nicht möglich.
+	 * 	- Compiler ï¿½berprï¿½ft Typen, mehrere Elementtypen innerhalb eines Baums nicht mï¿½glich.
 	 * 	- Keine Typcast erforderlich.
-	 * 	- Weitere Einschränkungen möglich.
+	 * 	- Weitere Einschrï¿½nkungen mï¿½glich.
 	 * 	...
 	 * 
 	 * Nachteile :
-	 * 	- Statische Variablen mit dem Typ "T" nicht möglich.
+	 * 	- Statische Variablen mit dem Typ "T" nicht mï¿½glich.
 	 *	  	private static T DEFAULT_WERT = ...; // compile error
 	 *	
-	 *	- Erzeugung eines Objekt vom Typ "T" nicht möglich.
+	 *	- Erzeugung eines Objekt vom Typ "T" nicht mï¿½glich.
      *		element = new T();  // compile-time error
      *	...  
 	 */
