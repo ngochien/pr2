@@ -5,18 +5,17 @@
  *
  * ngochien.le@haw-hamburg.de
  */
-
 package a03;
 
 /**
  * The class contains methods for performing some operations on a binary tree.
- * 
+ * <p>
  * @author Le
  * @author Nguyen
  */
 public class BinaryTreeHelper {
 
-    /** 
+    /**
      * Number of the visited nodes while traversing a binary tree.
      * Each method must reset this counter to zero before using it.
      */
@@ -34,7 +33,7 @@ public class BinaryTreeHelper {
     }
 
     /**
-     * Private helper method. 
+     * Private helper method.
      * Counts all children of a specified binary node, including itself.
      */
     private static <K, V> int countNodes(BinaryNode<K, V> node) {
@@ -105,7 +104,7 @@ public class BinaryTreeHelper {
      * Another method without recursion to get the k.th node of a binary tree.
      */
     @SuppressWarnings("unused")
-	private static <K, V> void find(BinaryNode<K, V> node, int k) {
+    private static <K, V> void find(BinaryNode<K, V> node, int k) {
         java.util.Stack<BinaryNode<K, V>> stack = new java.util.Stack<>();
         BinaryNode<K, V> current = node;
         int tmp = k;
@@ -122,7 +121,6 @@ public class BinaryTreeHelper {
                     System.out.println(current.getValue());
                     return;
                 }
-
                 current = current.getRight();
             }
         }

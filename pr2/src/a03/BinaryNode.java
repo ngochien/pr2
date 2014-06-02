@@ -5,7 +5,6 @@
  *
  * ngochien.le@haw-hamburg.de
  */
-
 package a03;
 
 /**
@@ -24,7 +23,7 @@ public class BinaryNode<K, V> {
     /**
      * Constructs a binary node with the specified key and value.
      * <p>
-     * @param key the key element of the binary node.
+     * @param key   the key element of the binary node.
      * @param value the value of the binary node.
      */
     public BinaryNode(K key, V value) {
@@ -34,7 +33,7 @@ public class BinaryNode<K, V> {
 
     /**
      * Returns the key of this binary node.
-     * 
+     * <p>
      * @return the key of this binary node.
      */
     public K getKey() {
@@ -43,8 +42,8 @@ public class BinaryNode<K, V> {
 
     /**
      * Returns the value of this binary node.
-     * 
-     * @return the value of this binary node. 
+     * <p>
+     * @return the value of this binary node.
      */
     public V getValue() {
         return value;
@@ -52,7 +51,7 @@ public class BinaryNode<K, V> {
 
     /**
      * Returns the left node of this binary node.
-     * 
+     * <p>
      * @return the left node.
      */
     public BinaryNode<K, V> getLeft() {
@@ -60,8 +59,8 @@ public class BinaryNode<K, V> {
     }
 
     /**
-     * Sets the left node of this binary node. 
-     * 
+     * Sets the left node of this binary node.
+     * <p>
      * @param left the left node to set.
      */
     protected void setLeft(BinaryNode<K, V> left) {
@@ -70,7 +69,7 @@ public class BinaryNode<K, V> {
 
     /**
      * Returns the right node of this binary node.
-     * 
+     * <p>
      * @return the right node.
      */
     public BinaryNode<K, V> getRight() {
@@ -78,8 +77,8 @@ public class BinaryNode<K, V> {
     }
 
     /**
-     * Sets the right node of this binary node. 
-     * 
+     * Sets the right node of this binary node.
+     * <p>
      * @param right the right node to set
      */
     protected void setRight(BinaryNode<K, V> right) {
