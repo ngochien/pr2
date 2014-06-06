@@ -48,47 +48,32 @@ public class WebShop implements Runnable {
     }
 
     @Override
-    public void run() {
-        while (!Thread.currentThread().isInterrupted()) {
-            Order order;
-
-            /* While checking number of removed elements and trying to remove an
-             * order from the bounded buffer, other threads are not allowed to
-             * access this buffer, or it may lead to inconsistent states.
-             * Here : enter critical section -> synchronized.
-             */
-            synchronized (buffer) {
-                if (buffer.getNumOfRemovedElements() < Simulation.NUM_OF_ORDERS) {
-                    order = buffer.take();
-                } else {
-                    /*
-                     * When all orders needed for the simulation have been removed
-                     * from the buffer, exits the run method.
-                     */
-                    System.out.println(Thread.currentThread().getName() + " - Exiting");
-                    return;
-                }
-            }
-            processOrder(order);
-        }
-    }
+	public void run() {
+		while (!Thread.currentThread().isInterrupted()) {
+			processOrder(buffer.take());
+		}
+//		System.out.println(Thread.currentThread().getName() + " - Exiting");
+	}
 
     /**
      * @param order
      */
-    public synchronized void processOrder(Order order) {
-        /*
-         * Only one order can be processed at a time -> synchronized.
-         */
-//		System.out.println(Thread.currentThread().getName() + " - Processing " + order);
-        try {
-            Thread.sleep(PROCESSING_TIME);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-            e.printStackTrace();
-        }
-        System.out.println("Successfully: " + order);
-    }
+	public synchronized void processOrder(Order order) {
+		if (order != null) {
+			/*
+			 * Only one order can be processed at a time -> synchronized.
+			 */
+			// System.out.println(Thread.currentThread().getName() +
+			// " - Processing " + order);
+			try {
+				Thread.sleep(PROCESSING_TIME);
+			} catch (InterruptedException e) {
+				Thread.currentThread().interrupt();
+				// Not return here, cause the order shoulde be successfully processed.
+			}
+			System.out.println("Successfully: " + order);
+		}
+	}
 
     /**
      * Returns all customers of this web shop.

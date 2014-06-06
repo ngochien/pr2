@@ -16,8 +16,6 @@ import java.util.TimerTask;
  */
 public class OrderCancel extends TimerTask {
 
-    public static final int CANCELLING_PERIOD = 1200;
-
     /**
      * To be cancelled orders are taken from this buffer.
      */
@@ -33,24 +31,13 @@ public class OrderCancel extends TimerTask {
     }
 
     @Override
-    public void run() {
-        /* While checking number of removed elements and trying to remove an
-         * order from the bounded buffer, other threads are not allowed to
-         * access this buffer, or it may lead to inconsistent states.
-         * Here : enter critical section -> synchronized.
-         */
-        synchronized (buffer) {
-            if (buffer.getNumOfRemovedElements() < Simulation.NUM_OF_ORDERS) {
-                Order order = buffer.take();
-                System.out.println("Cancelled:    " + order);
-            } else {
-                /*
-                 * When all orders needed for the simulation have been removed
-                 * from the buffer, exits the run method.
-                 */
-                System.out.println(Thread.currentThread().getName() + " - Exiting");
-                return;
-            }
-        }
-    }
+	public void run() {
+		synchronized (buffer) {
+			if (!buffer.isEmpty()) {
+				System.out.println("Cancelled:    " + buffer.take());
+			} else {
+//				System.out.println(Thread.currentThread().getName() + " - Exiting");
+			}
+		}
+	}
 }

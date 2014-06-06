@@ -67,19 +67,32 @@ public class BoundedBuffer<E> {
     }
 
     /**
+	 * @return
+	 */
+	public synchronized boolean isFull() {
+		return list.size() >= size;
+	}
+	
+	/**
+	 * @return
+	 */
+	public synchronized boolean isEmpty() {
+		return list.size() == 0;
+	}
+    
+    /**
      * Puts an element of type E in this bounded buffer.
      * <p>
      * @param element the element to be put.
      */
     public synchronized void put(E element) {
 //		System.out.println(Thread.currentThread().getName() + " - Trying to put " + element);
-        while (list.size() == size) {
+        while (isFull()) {
             try {
 //				System.out.println(Thread.currentThread().getName() + " - Waiting");
                 wait();
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
-                e.printStackTrace();
                 return;
             }
         }
@@ -88,7 +101,7 @@ public class BoundedBuffer<E> {
         numOfAddedElements++;
         notifyAll();
     }
-
+	
     /**
      * Takes an element and removes it from this bounded buffer.
      * <p>
@@ -96,13 +109,12 @@ public class BoundedBuffer<E> {
      */
     public synchronized E take() {
 //		System.out.println(Thread.currentThread().getName() + " - Trying to take");
-        while (list.size() == 0) {
+        while (isEmpty()) {
             try {
 //				System.out.println(Thread.currentThread().getName() + " - Waiting");
                 wait();
             } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                e.printStackTrace();
+                Thread.currentThread().interrupt();     
                 return null;
             }
         }
@@ -112,4 +124,5 @@ public class BoundedBuffer<E> {
         notifyAll();
         return element;
     }
+    
 }

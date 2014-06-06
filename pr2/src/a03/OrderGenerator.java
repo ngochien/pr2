@@ -38,29 +38,12 @@ public class OrderGenerator implements Runnable {
     }
 
     @Override
-    public void run() {
-        while (!Thread.currentThread().isInterrupted()) {
-            Order order = generateOrder();
-
-            /* While checking number of added elements and trying to put an
-             * order in the bounded buffer, other threads are not allowed to
-             * access this buffer, or it may lead to inconsistent states.
-             * Here : enter critical section -> synchronized.
-             */
-            synchronized (buffer) {
-                if (buffer.getNumOfAddedElements() < Simulation.NUM_OF_ORDERS) {
-                    buffer.put(order);
-                } else {
-                    /*
-                     * When all orders needed for the simulation have been put in the
-                     * buffer, exits the run method.
-                     */
-                    System.out.println(Thread.currentThread().getName() + " - Exiting");
-                    return;
-                }
-            }
-        }
-    }
+	public void run() {
+		for (int i = 0; i < Simulation.NUM_OF_ORDERS; i++) {
+			buffer.put(generateOrder());
+		}
+//		System.out.println(Thread.currentThread().getName() + " - Exiting");
+	}
 
     /**
      * Generates an order with a customer and a product randomly picked from web shop.

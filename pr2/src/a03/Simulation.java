@@ -21,16 +21,28 @@ import java.util.Timer;
 public class Simulation {
 
     public static final int DEFAULT_BUFFER_SIZE = 5;
+    
     public static final int NUM_OF_CUSTOMERS = 10;
     public static final int NUM_OF_PRODUCTS = 10;
     public static final int NUM_OF_ORDERS = 10;
+    
+    public static final int CANCELLING_PERIOD = 1200;
+    public static final int DELAY = 1000;
 
+    public static final int SIMULATION_TIME = 6000;
     /**
      * Program entry point.
      */
     public static void main(String[] args) {
+    	long start = System.currentTimeMillis();
         new Simulation().start();
+        try {
+			Thread.sleep(DELAY);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
         System.out.println("--------------------Simulation done-------------------");
+        System.out.println(System.currentTimeMillis()-start);
     }
 
     /**
@@ -54,16 +66,20 @@ public class Simulation {
         // Start all the created threads and timer.
         shopThread.start();
         generatorThread.start();
-        cancelTimer.schedule(cancelTask, OrderCancel.CANCELLING_PERIOD, OrderCancel.CANCELLING_PERIOD);
+        cancelTimer.schedule(cancelTask, DELAY, CANCELLING_PERIOD);
 
         // Wait until all other threads are finished.
         try {
-            shopThread.join();
-            generatorThread.join();
-            cancelTimer.cancel();
+        	generatorThread.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        
+        while (!buffer.isEmpty()) {
+        	// EMPTY - Is this a bad practice?
+        }
+        shopThread.interrupt();
+        cancelTimer.cancel();
     }
 
     /**
