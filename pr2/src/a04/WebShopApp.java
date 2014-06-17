@@ -21,8 +21,9 @@ public class WebShopApp extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		new WebShopGUI(primaryStage);
-		primaryStage.show();
+		WebShop shop = new WebShop(null);
+		WebShopController controller = new WebShopController(shop);
+		controller.getView().show(primaryStage);
 	}
 
 }
