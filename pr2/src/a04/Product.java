@@ -15,40 +15,43 @@ package a04;
  */
 public class Product {
 
-    private String name;
-    private double price;
+	private String name;
+	private double price;
 
-    /**
-     * Constructs a product with the given name and price.
-     * <p>
-     * @param name  name of the product to be created.
-     * @param price price of the product to be created.
-     */
-    public Product(String name, double price) {
-        this.name = name;
-        this.price = price;
-    }
+	/**
+	 * Constructs a product with the given name and price.
+	 * <p>
+	 * @param name  name of the product to be created.
+	 * @param price price of the product to be created.
+	 */
+	public Product(String name, double price) {
+		if (name == null || name.isEmpty()) {
+			throw new IllegalArgumentException("Product name must not empty.");
+		}
+		this.name = name;
+		this.price = price;
+	}
 
-    /**
-     * Returns name of this product.
-     * <p>
-     * @return name of this product.
-     */
-    public String getName() {
-        return name;
-    }
+	/**
+	 * Returns name of this product.
+	 * <p>
+	 * @return name of this product.
+	 */
+	public String getName() {
+		return name;
+	}
 
-    /**
-     * Returns price of this product.
-     * <p>
-     * @return price of this product.
-     */
-    public double getPrice() {
-        return price;
-    }
+	/**
+	 * Returns price of this product.
+	 * <p>
+	 * @return price of this product.
+	 */
+	public double getPrice() {
+		return price;
+	}
 
-    @Override
-    public String toString() {
-        return name + " (" + price + " EURO)";
-    }
+	@Override
+	public String toString() {
+		return name + " (" + price + " EURO)";
+	}
 }

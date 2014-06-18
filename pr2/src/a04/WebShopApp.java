@@ -21,9 +21,17 @@ public class WebShopApp extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		WebShop shop = new WebShop(null);
-		WebShopController controller = new WebShopController(shop);
-		controller.getView().show(primaryStage);
+		WebShop shop = new WebShop();
+		WebShopModel model = new WebShopModel(shop);
+		WebShopView view = new WebShopView(model);
+		new WebShopController(shop, view);
+
+		shop.addCustomer("Ngoc Hien", "Le");
+		shop.addCustomer("Bich Ngoc", "Nguyen");
+		shop.addProduct("iPhone", 559);
+		shop.addProduct("iPad", 499.99);
+
+		view.create(primaryStage);
 	}
 
 }

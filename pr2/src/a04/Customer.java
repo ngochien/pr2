@@ -15,78 +15,81 @@ package a04;
  */
 public class Customer {
 
-    /**
-     * Number of created customer objects.
-     */
-    private static int customerCounter = 0;
+	/**
+	 * Number of created customer objects.
+	 */
+	private static int customerCounter = 0;
 
-    /**
-     * First name of customer
-     */
-    private String firstName;
+	/**
+	 * First name of customer
+	 */
+	private String firstName;
 
-    /**
-     * Last name of customer
-     */
-    private String lastName;
+	/**
+	 * Last name of customer
+	 */
+	private String lastName;
 
-    /**
-     * Unique customer ID
-     */
-    private final int customerID;
+	/**
+	 * Unique customer ID
+	 */
+	private final int customerID;
 
-    /**
-     * Constructs a customer with the given first name and last name.
-     * The unique customer ID is automatic generated.
-     * <p>
-     * @param firstName first name of the customer.
-     * @param lastName  last name of the customer.
-     */
-    public Customer(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.customerID = customerCounter;
-        customerCounter++;
-    }
+	/**
+	 * Constructs a customer with the given first name and last name.
+	 * The unique customer ID is automatic generated.
+	 * <p>
+	 * @param firstName first name of the customer.
+	 * @param lastName  last name of the customer.
+	 */
+	public Customer(String firstName, String lastName) {
+		if (firstName == null || firstName.isEmpty() || lastName.isEmpty() || lastName == null) {
+			throw new IllegalArgumentException("Empty name is not allowed.");
+		}
+		this.firstName = firstName;
+		this.lastName = lastName;
+		customerID = customerCounter;
+		customerCounter++;
+	}
 
-    /**
-     * Returns first name of this customer.
-     * <p>
-     * @return firstName the first name of this customer.
-     */
-    public String getFirstName() {
-        return firstName;
-    }
+	/**
+	 * Returns first name of this customer.
+	 * <p>
+	 * @return firstName the first name of this customer.
+	 */
+	public String getFirstName() {
+		return firstName;
+	}
 
-    /**
-     * Returns last name of this customer.
-     * <p>
-     * @return lastName the last name of this customer.
-     */
-    public String getLastName() {
-        return lastName;
-    }
+	/**
+	 * Returns last name of this customer.
+	 * <p>
+	 * @return lastName the last name of this customer.
+	 */
+	public String getLastName() {
+		return lastName;
+	}
 
-    /**
-     * Returns the unique customer ID.
-     * <p>
-     * @return customerID ID of this customer.
-     */
-    public int getCustomerID() {
-        return customerID;
-    }
+	/**
+	 * Returns the unique customer ID.
+	 * <p>
+	 * @return customerID ID of this customer.
+	 */
+	public int getCustomerID() {
+		return customerID;
+	}
 
-    /**
-     * Returns the full name of this customer in the form "LastName FirstName".
-     * <p>
-     * @return a string that contains full name of this customer in the specified form.
-     */
-    public String getFullName() {
-        return getLastName() + " " + getFirstName();
-    }
+	/**
+	 * Returns the full name of this customer in the form "LastName FirstName".
+	 * <p>
+	 * @return a string that contains full name of this customer in the specified form.
+	 */
+	public String getFullName() {
+		return getLastName() + " " + getFirstName();
+	}
 
-    @Override
-    public String toString() {
-        return getFullName() + " (ID:" + getCustomerID() + ")";
-    }
+	@Override
+	public String toString() {
+		return getFullName() + " (ID:" + getCustomerID() + ")";
+	}
 }

@@ -5,6 +5,7 @@
  *
  * ngochien.le@haw-hamburg.de
  */
+
 package a04;
 
 import java.util.Observable;
@@ -15,66 +16,166 @@ import java.util.Observable;
  * @author Le
  * @author Nguyen
  */
-public class WebShop extends Observable implements Runnable {
+public class WebShop extends Observable {
 
 	/**
-	 * Time needed to process an order.
+	 * All kind of changes that can happen in a web shop.
+	 * 
+	 * When a web shop has made a change, then a corresponding object
+	 * of this enum class will be passed to all observers to notify the change.
 	 */
-	public static final int PROCESSING_TIME = 1000;
+	public enum Change {
+		ADDED_CUSTOMER, REMOVED_CUSTOMER, ADDED_PRODUCT, REMOVED_PRODUCT, PROCESSING_ORDER
+	}
+
+	/** Steps needed to process an order. */
+	public static final int PROCESSING_STEPS = 20;
+
+	/** Saves all customers to a binary tree. */
+	private BinaryTree<String, Customer> customers = new BinaryTree<>(new StringComparator());
+
+	/** Saves all products to a binary tree. */
+	private BinaryTree<String, Product> products = new BinaryTree<>(new StringComparator());
+
+	/** The processing status of an order, which varies from 0 to 1. */
+	private float processingStatus = 0.0f;
 
 	/**
-	 * Saves all customers to a binary tree.
+	 * Returns the processing status of an order in this web shop.
+	 * 
+	 * Observers of this web shop can use this method to get information they need
+	 * when the web shop has added or removed a customer.
+	 * 
+	 * @return a floating point number between 0 and 1.
 	 */
-	private BinaryTree<String, Customer> customers;
+	public float getProcessingStatus() {
+		return processingStatus;
+	}
+
+	/** The last added or removed customer in this web shop. */
+	private Customer lastChangedCustomer;
 
 	/**
-	 * Saves all products to a binary tree.
+	 * Returns the customer who was last changed in this web shop.
+	 * 
+	 * Observers of this web shop can use this method to get information they need
+	 * when the web shop has added or removed a customer.
+	 * 
+	 * @return a customer.
 	 */
-	private BinaryTree<String, Product> products;
+	public Customer getLastChangedCustomer() {
+		return lastChangedCustomer;
+	}
+
+	/** The last added or removed product in this web shop. */
+	private Product lastChangedProduct;
 
 	/**
-	 * A bounded buffer which stores all orders of this web shop.
+	 * Returns the product which was last changed in this web shop.
+	 * 
+	 * Observers of this web shop can use this method to get information they need
+	 * when the web shop has added or removed a product.
+	 * 
+	 * @return a product.
 	 */
-	private BoundedBuffer<Order> buffer;
+	public Product getLastChangedProduct() {
+		return lastChangedProduct;
+	}
 
 	/**
-	 *
-	 * Constructs a web shop whose orders are stored in the given bounded buffer.
+	 * Adds a customer with firstName and lastName, then notifies all observers about the change.
 	 * <p>
-	 * @param buffer the bounded buffer that stores orders.
+	 * @param firstName first name of the customer to be added.
+	 * @param lastName  last name of the customer to be added.
+	 * <p>
+	 * @throws DuplicateKeyException
+	 *                               if a customer with the same first name and last name already exists.
 	 */
-	public WebShop(BoundedBuffer<Order> buffer) {
-		this.buffer = buffer;
-		customers = new BinaryTree<>(new StringComparator());
-		products = new BinaryTree<>(new StringComparator());
-	}
-
-	@Override
-	public void run() {
-		while (!Thread.currentThread().isInterrupted()) {
-			processOrder(buffer.take());
-		}
-		//		System.out.println(Thread.currentThread().getName() + " - Exiting");
+	public void addCustomer(String firstName, String lastName) throws DuplicateKeyException {
+		lastChangedCustomer = new Customer(firstName, lastName);
+		customers.insert(lastChangedCustomer.getFullName(), lastChangedCustomer);
+		setChanged();
+		notifyObservers(Change.ADDED_CUSTOMER);
 	}
 
 	/**
-	 * @param order
+	 * Removes the customer with the given name from this web shop, then notifies
+	 * all observers about the change. If no customer with the specified name
+	 * exists, this web shop is unchanged and no observers are notified.
+	 * 
+	 * @param firstName first name of the customer to be removed.
+	 * @param lastName last name of the customer to be removed.
 	 */
-	public synchronized void processOrder(Order order) {
-		if (order != null) {
-			/*
-			 * Only one order can be processed at a time -> synchronized.
-			 */
-			// System.out.println(Thread.currentThread().getName() +
-			// " - Processing " + order);
-			try {
-				Thread.sleep(PROCESSING_TIME);
-			} catch (InterruptedException e) {
-				Thread.currentThread().interrupt();
-				// Not return here, cause the order shoulde be successfully processed.
-			}
-			System.out.println("Successfully: " + order);
+	public void removeCustomer(String firstName, String lastName) {
+		lastChangedCustomer = customers.search(lastName + " " + firstName);
+		if (lastChangedCustomer != null) {
+			customers.delete(lastName + " " + firstName);
+			setChanged();
+			notifyObservers(Change.REMOVED_CUSTOMER);
 		}
+	}
+
+	/**
+	 * Adds a product with the given name and price, then notifies all observers.
+	 * <p>
+	 * @param name  name of the product to be added.
+	 * @param price price of the product to be added.
+	 * <p>
+	 * @throws DuplicateKeyException
+	 *                               if a product with the same name and price already exists.
+	 */
+	public void addProduct(String name, double price) throws DuplicateKeyException {
+		lastChangedProduct = new Product(name, price);
+		products.insert(lastChangedProduct.getName(), lastChangedProduct);
+		setChanged();
+		notifyObservers(Change.ADDED_PRODUCT);
+	}
+
+	/**
+	 * Removes the product with the specified name from this web shop, then notifies all
+	 * observers about the change. If no product with the given name exists,
+	 * this web shop is unchanged and no observers are notified.
+	 * 
+	 * @param name name of the product to be removed.
+	 */
+	public void removeProduct(String name) {
+		lastChangedProduct = products.search(name);
+		if (lastChangedProduct != null) {
+			products.delete(name);
+			setChanged();
+			notifyObservers(Change.REMOVED_PRODUCT);
+		}
+	}
+
+	/**
+	 * Simulates an order processing.
+	 * 
+	 * @param customer the customer who gave order.
+	 * @param product the ordered product.
+	 */
+	public void processOrder(Customer customer, Product product) {
+		final Order order = new Order(customer, product);
+
+		new Thread() {
+			@Override
+			public void run() {
+				// Only one order can be processed at one time -> synchronized.
+				synchronized (getClass()) {
+					processingStatus = 0.0f;
+					while (processingStatus < 1.0f) {
+						try {
+							Thread.sleep(100);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+						processingStatus += 1.0f / PROCESSING_STEPS;
+						setChanged();
+						notifyObservers(WebShop.Change.PROCESSING_ORDER);
+					}
+					System.out.println("Successfully processed: " + order);
+				}
+			}
+		}.start();
 	}
 
 	/**
@@ -108,26 +209,6 @@ public class WebShop extends Observable implements Runnable {
 	}
 
 	/**
-	 * Adds a customer with firstName and lastName.
-	 * <p>
-	 * @param firstName first name of the customer to be added.
-	 * @param lastName  last name of the customer to be added.
-	 * <p>
-	 * @throws DuplicateKeyException
-	 *                               if a customer with the same first name and last name already exists.
-	 */
-	public void addCustomer(String firstName, String lastName) throws DuplicateKeyException {
-		if (firstName == null || firstName.isEmpty() || lastName.isEmpty()
-				|| lastName == null) {
-			throw new IllegalArgumentException("Empty name is not allowed");
-		}
-		Customer customer = new Customer(firstName, lastName);
-		customers.insert(customer.getFullName(), customer);
-		setChanged();
-		notifyObservers(customer);
-	}
-
-	/**
 	 * Returns all products of this web shop.
 	 * <p>
 	 * @return a binary tree that stores all products of this web shop.
@@ -156,34 +237,14 @@ public class WebShop extends Observable implements Runnable {
 		return products.search(name);
 	}
 
-	/**
-	 * Adds a product with the given name and price.
-	 * <p>
-	 * @param name  name of the product to be added.
-	 * @param price price of the product to be added.
-	 * <p>
-	 * @throws DuplicateKeyException
-	 *                               if a product with the same name and price already exists.
-	 */
-	public void addProduct(String name, double price) throws DuplicateKeyException {
-		Product product = new Product(name, price);
-		products.insert(product.getName(), product);
-		setChanged();
-		notifyObservers(product);
-	}
-
-	/**
-	 * Prints all customers shop to console.
-	 */
+	/** Prints all customers to console. */
 	public void printAllCustomers() {
 		System.out.println("All customers:");
 		System.out.print(customers);
 		System.out.println("------------------------------");
 	}
 
-	/**
-	 * Prints all products to console.
-	 */
+	/** Prints all products to console. */
 	public void printAllProducts() {
 		System.out.println("All products:");
 		System.out.print(products);
