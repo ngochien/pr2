@@ -28,7 +28,7 @@ public class WebShopModel implements Observer {
 	private WebShop shop;
 
 	/** This property represents the processing status of an order. */
-	private FloatProperty processingStatus;
+	private FloatProperty processingStatus = new SimpleFloatProperty();
 
 	/** All customers of the web shop model. */
 	private ObservableList<Customer> customers = FXCollections.observableArrayList();
@@ -67,12 +67,9 @@ public class WebShopModel implements Observer {
 	/**
 	 * Returns the processingStatus property of this model.
 	 * 
-	 * @return the FloatProperty that represents processing status of an order.
+	 * @return ein FloatProperty that represents processing status of an order.
 	 */
 	public FloatProperty processingStatusProperty() {
-		if (processingStatus == null) {
-			processingStatus = new SimpleFloatProperty();
-		}
 		return processingStatus;
 	}
 

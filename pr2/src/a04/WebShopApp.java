@@ -24,14 +24,16 @@ public class WebShopApp extends Application {
 		WebShop shop = new WebShop();
 		WebShopModel model = new WebShopModel(shop);
 		WebShopView view = new WebShopView(model);
-		new WebShopController(shop, view);
+		WebShopController controller = new WebShopController(shop, view);
 
-		shop.addCustomer("Ngoc Hien", "Le");
-		shop.addCustomer("Bich Ngoc", "Nguyen");
+		for (int i = 0; i < 20; i++) {
+		shop.addCustomer("Ngoc Hien", "Le" + i);
+		shop.addCustomer("Bich Ngoc", "Nguyen" + i);
+		}
 		shop.addProduct("iPhone", 559);
 		shop.addProduct("iPad", 499.99);
-
-		view.create(primaryStage);
+		
+		controller.showView(primaryStage);
 	}
 
 }

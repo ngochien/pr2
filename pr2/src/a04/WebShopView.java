@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -19,7 +18,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
+import javafx.scene.layout.Pane;
 
 /**
  * A graphical user interface which allows users to perform some operations on data of a web shop.
@@ -32,9 +31,22 @@ public class WebShopView {
 	private WebShopModel model;
 
 	/**
-	 * All graphical components of this view.
+	 * Constructs a web shop view with the specified model and controller.
+	 * 
+	 * @param model the model which this view represents graphically.
+	 * @param controller the controller that controlls this view and the model.
 	 */
-	private GridPane grid = new GridPane();
+	public WebShopView(WebShopModel model) {
+		this.model = model;
+	}
+
+	/***************************************************************************
+	 *                                                                         *
+	 * All graphical components of this view.                                  *
+	 *                                                                         *
+	 **************************************************************************/
+
+	private GridPane layout = new GridPane();
 
 	private Label customersLabel = new Label("Customers");
 	private Label productsLabel = new Label("Products");
@@ -49,14 +61,14 @@ public class WebShopView {
 
 	private ProgressBar statusBar = new ProgressBar();
 
-	/**
-	 * Constructs a web shop view with the specified model and controller.
-	 * 
-	 * @param model the model which this view represents graphically.
-	 * @param controller the controller that controlls this view and the model.
-	 */
-	public WebShopView(WebShopModel model) {
-		this.model = model;
+	/***************************************************************************
+	 *                                                                         *
+	 * Getter for graphical components of this view.                           *
+	 *                                                                         *
+	 **************************************************************************/
+
+	public Pane getLayout() {
+		return layout;
 	}
 
 	public TableView<Customer> getCustomerTable() {
@@ -67,31 +79,18 @@ public class WebShopView {
 		return productTable;
 	}
 
-	/**
-	 * @return the addCustomerButton
-	 */
 	public Button getAddCustomerButton() {
 		return addCustomerButton;
 	}
 
-	/**
-	 * @return the addProductButton
-	 */
 	public Button getAddProductButton() {
 		return addProductButton;
 	}
 
-
-	/**
-	 * @return the removeCustomerButton
-	 */
 	public Button getRemoveCustomerButton() {
 		return removeCustomerButton;
 	}
 
-	/**
-	 * @return the placeOrderButton
-	 */
 	public Button getPlaceOrderButton() {
 		return placeOrderButton;
 	}
@@ -105,12 +104,16 @@ public class WebShopView {
 		return buttonList;
 	}
 
-	public void create(final Stage stage) {
-		stage.setTitle("WebShop");
+	/***************************************************************************
+	 *                                                                         *
+	 * Methods                                                                 *
+	 *                                                                         *
+	 **************************************************************************/
 
-		grid.setPadding(new Insets(10));
-		grid.setHgap(10);
-		grid.setVgap(10);
+	public void initialize() {
+		layout.setPadding(new Insets(10));
+		layout.setHgap(10);
+		layout.setVgap(10);
 
 		customerTable = new TableView<Customer>(model.getCustomers());
 		TableColumn<Customer, String> firstNameColumn = createTableColumn("First name", "firstName");
@@ -127,18 +130,15 @@ public class WebShopView {
 		statusBar.progressProperty().bind(model.processingStatusProperty());
 		enableStatusBar(false);
 
-		grid.add(customersLabel, 0, 0);
-		grid.add(productsLabel, 1, 0);
-		grid.add(customerTable, 0, 1);
-		grid.add(productTable, 1, 1);
-		grid.add(addCustomerButton, 0, 2);
-		grid.add(addProductButton, 1, 2);
-		grid.add(removeCustomerButton, 0, 3);
-		grid.add(placeOrderButton, 0, 4);
-		grid.add(statusBar, 1, 4);
-
-		stage.setScene(new Scene(grid));
-		stage.show();
+		layout.add(customersLabel, 0, 0);
+		layout.add(productsLabel, 1, 0);
+		layout.add(customerTable, 0, 1);
+		layout.add(productTable, 1, 1);
+		layout.add(addCustomerButton, 0, 2);
+		layout.add(addProductButton, 1, 2);
+		layout.add(removeCustomerButton, 0, 3);
+		layout.add(placeOrderButton, 0, 4);
+		layout.add(statusBar, 1, 4);
 	}
 
 	public void enableStatusBar(boolean value) {

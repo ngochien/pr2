@@ -8,16 +8,18 @@
 package a04;
 
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 /**
- * A controller that handles all user interactions, then updates the view and the model correspondingly.
+ * A controller that handles all user interactions, then updates the view and the model
+ * correspondingly.
  * 
  * @author Le
  */
-public class WebShopController implements EventHandler<Event> {
+public class WebShopController implements EventHandler<ActionEvent> {
 
 	private WebShop shop;
 	private WebShopView view;
@@ -31,14 +33,24 @@ public class WebShopController implements EventHandler<Event> {
 		}
 	}
 
+	public void showView(Stage stage) {
+		stage.setTitle("WebShop");
+		view.initialize();
+		stage.setScene(new Scene(view.getLayout()));
+		stage.show();
+	}
+
 	@Override
-	public void handle(Event event) {
+	public void handle(ActionEvent event) {
 		if (event.getSource() == view.getAddCustomerButton()) {
 			addCustomer();
+
 		} else if (event.getSource() == view.getAddProductButton()) {
 			addProduct();
+
 		} else if (event.getSource() == view.getRemoveCustomerButton()) {
 			removeCustomer();
+
 		} else if (event.getSource() == view.getPlaceOrderButton()) {
 			processOrder();
 		}

@@ -155,7 +155,6 @@ public class WebShop extends Observable {
 	 */
 	public void processOrder(Customer customer, Product product) {
 		final Order order = new Order(customer, product);
-
 		new Thread() {
 			@Override
 			public void run() {
@@ -166,17 +165,18 @@ public class WebShop extends Observable {
 						try {
 							Thread.sleep(100);
 						} catch (InterruptedException e) {
-							e.printStackTrace();
+							System.err.println("Error while sleeping");
 						}
 						processingStatus += 1.0f / PROCESSING_STEPS;
 						setChanged();
-						notifyObservers(WebShop.Change.PROCESSING_ORDER);
+						notifyObservers(Change.PROCESSING_ORDER);
 					}
 					System.out.println("Successfully processed: " + order);
 				}
 			}
 		}.start();
 	}
+	
 
 	/**
 	 * Returns all customers of this web shop.
