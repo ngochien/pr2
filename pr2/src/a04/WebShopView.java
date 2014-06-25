@@ -23,7 +23,7 @@ import javafx.scene.layout.Pane;
 /**
  * A graphical user interface which allows users to perform some operations on data of a web shop.
  * 
- * @author Le
+ * @author Le Nguyen
  */
 public class WebShopView {
 
@@ -34,17 +34,16 @@ public class WebShopView {
 	 * Constructs a web shop view with the specified model and controller.
 	 * 
 	 * @param model the model which this view represents graphically.
-	 * @param controller the controller that controlls this view and the model.
 	 */
 	public WebShopView(WebShopModel model) {
 		this.model = model;
 	}
 
-	/***************************************************************************
-	 *                                                                         *
-	 * All graphical components of this view.                                  *
-	 *                                                                         *
-	 **************************************************************************/
+	/* *************************************************************************
+	 * *
+	 * All graphical components of this view. * *
+	 * ************************************************************************
+	 */
 
 	private GridPane layout = new GridPane();
 
@@ -61,11 +60,11 @@ public class WebShopView {
 
 	private ProgressBar statusBar = new ProgressBar();
 
-	/***************************************************************************
-	 *                                                                         *
-	 * Getter for graphical components of this view.                           *
-	 *                                                                         *
-	 **************************************************************************/
+	/* *************************************************************************
+	 * *
+	 * Getter for graphical components of this view. * *
+	 * ************************************************************************
+	 */
 
 	public Pane getLayout() {
 		return layout;
@@ -104,23 +103,24 @@ public class WebShopView {
 		return buttonList;
 	}
 
-	/***************************************************************************
-	 *                                                                         *
-	 * Methods                                                                 *
-	 *                                                                         *
-	 **************************************************************************/
+	/* *************************************************************************
+	 * *
+	 * Methods. * *************************************************************************
+	 */
 
 	public void initialize() {
 		layout.setPadding(new Insets(10));
 		layout.setHgap(10);
 		layout.setVgap(10);
 
+		// Sets up the customer table.
 		customerTable = new TableView<Customer>(model.getCustomers());
 		TableColumn<Customer, String> firstNameColumn = createTableColumn("First name", "firstName");
 		TableColumn<Customer, String> lastNameColumn = createTableColumn("Last name", "lastName");
 		customerTable.getColumns().add(firstNameColumn);
 		customerTable.getColumns().add(lastNameColumn);
 
+		// Sets up the product table.
 		productTable = new TableView<Product>(model.getProducts());
 		TableColumn<Product, String> productNameColumn = createTableColumn("Name", "name");
 		TableColumn<Product, Double> priceColumn = createTableColumn("Price","price");
@@ -141,10 +141,16 @@ public class WebShopView {
 		layout.add(statusBar, 1, 4);
 	}
 
+	/**
+	 * Enables or disables the status bar.
+	 */
 	public void enableStatusBar(boolean value) {
 		statusBar.setVisible(value);
 	}
 
+	/**
+	 * Helper method for creating table columns from a specified property.
+	 */
 	private <S, T> TableColumn<S, T> createTableColumn(String columnName, String property) {
 		TableColumn<S, T> column = new TableColumn<S, T>(columnName);
 		column.setCellValueFactory(new PropertyValueFactory<S, T>(property));

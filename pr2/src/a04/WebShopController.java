@@ -14,7 +14,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 /**
- * A controller that handles all user interactions, then updates the view and the model
+ * A controller that handles all user interactions and updates the view and the model
  * correspondingly.
  * 
  * @author Le
@@ -28,11 +28,15 @@ public class WebShopController implements EventHandler<ActionEvent> {
 		this.shop = shop;
 		this.view = view;
 
+		// Adds this controller as a common event handler of all buttons in the view.
 		for (Button btn : view.getAllButtons()) {
 			btn.addEventHandler(ActionEvent.ACTION, this);
 		}
 	}
 
+	/**
+	 * Sets up and then shows the view.
+	 */
 	public void showView(Stage stage) {
 		stage.setTitle("WebShop");
 		view.initialize();

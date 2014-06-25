@@ -33,6 +33,9 @@ public class InputDialog {
 
 	private Button okButton = new Button("OK");
 
+	/**
+	 * Creates a simple input dialog with a arbitrary number of labels and text fields.
+	 */
 	public InputDialog(String title, String... labels) {
 		final Stage stage = new Stage();
 		stage.setTitle(title);
@@ -42,6 +45,7 @@ public class InputDialog {
 		grid.setHgap(10);
 		grid.setVgap(10);
 
+		// Adds all labels and corresponding text fields.
 		for (int i = 0; i < labels.length; i++) {
 			Label label = new Label(labels[i]);
 			TextField textField = new TextField();
@@ -55,7 +59,7 @@ public class InputDialog {
 			@Override
 			public void handle(ActionEvent event) {
 				for (TextField txt : textFields) {
-					inputStrings.add(txt.getText());
+					inputStrings.add(txt.getText());	// Gets all inputted strings.
 				}
 				stage.close();
 			}
@@ -65,6 +69,11 @@ public class InputDialog {
 		stage.showAndWait();
 	}
 
+	/**
+	 * Gets the next available input string corresponding to the vertical order of the text fields in this dialog.
+	 * 
+	 * @return a string.
+	 */
 	public String getNextInput() {
 		return inputStrings.remove(0);
 	}

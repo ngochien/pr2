@@ -11,7 +11,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 /**
- * @author Le
+ * @author Le Nguyen
  */
 public class WebShopApp extends Application {
 
@@ -26,13 +26,12 @@ public class WebShopApp extends Application {
 		WebShopView view = new WebShopView(model);
 		WebShopController controller = new WebShopController(shop, view);
 
-		for (int i = 0; i < 20; i++) {
-		shop.addCustomer("Ngoc Hien", "Le" + i);
-		shop.addCustomer("Bich Ngoc", "Nguyen" + i);
+		// Creates test data.
+		for (int i = 0; i < 10; i++) {
+			shop.addCustomer(i + "", "Kunde");
+			shop.addProduct("iPhone " + i, 599.99);
 		}
-		shop.addProduct("iPhone", 559);
-		shop.addProduct("iPad", 499.99);
-		
+
 		controller.showView(primaryStage);
 	}
 

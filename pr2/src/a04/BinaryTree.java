@@ -106,10 +106,20 @@ public class BinaryTree<K, V> {
 		}
 	}
 
+	/**
+	 * Deletes the binary node with the specified key.
+	 * 
+	 * @param key
+	 */
 	public void delete(K key) {
 		root = delete(root, key);
 	}
 
+	/**
+	 * @param node
+	 * @param key
+	 * @return
+	 */
 	private BinaryNode<K, V> delete(BinaryNode<K, V> node, K key) {
 		if (node == null) {
 			return null;
@@ -126,6 +136,8 @@ public class BinaryTree<K, V> {
 			if (node.getLeft() == null) {
 				return node.getRight();
 			}
+
+			// Replaces the deleted node with the min. node of the right subtree.
 			BinaryNode<K, V> tmp = node;
 			node = min(tmp.getRight());
 			node.setRight(deleteMin(tmp.getRight()));
@@ -134,6 +146,10 @@ public class BinaryTree<K, V> {
 		return node;
 	}
 
+	/**
+	 * Deletes the min. node of a subtree, beginning from the specified node as the root. and then
+	 * returns the given node with the min. node deleted.
+	 */
 	private BinaryNode<K, V> deleteMin(BinaryNode<K, V> node) {
 		if (node.getLeft() == null) {
 			return node.getRight();
@@ -142,6 +158,10 @@ public class BinaryTree<K, V> {
 		return node;
 	}
 
+	/**
+	 * Finds the min. node of a subtree, beginning from the specified node as the root. The min. node
+	 * of a binary tree is the node with the minimum key. That is, the leftmost one in the tree.
+	 */
 	private BinaryNode<K, V> min(BinaryNode<K, V> node) {
 		if (node.getLeft() == null) {
 			return node;
